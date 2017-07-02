@@ -73,7 +73,7 @@ int main()
    while(M--)
    {
       scanf("%d %d", &v1, &v2);
-      graph[v1][v2] = graph[v2][v1] = 1;  // bidirectional
+      graph[v1][v2] = graph[v2][v1] = 1;  // adjacent matrix
    }
 
    DFS(V);
