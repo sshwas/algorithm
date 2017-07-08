@@ -23,7 +23,7 @@ int main()
       dist[i][j] = dist[j][i] = 1;
    }
 
-   // shortest distance
+   // shortest distance ( Floyd-Warshall algorithm )
    for(k = 1; k <= N; k++)
       for(i = 1; i <= N; i++)
          for(j = 1; j <= N; j++)
