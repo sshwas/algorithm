@@ -2,7 +2,7 @@
 
 #define MAX(a,b)  ((a)>(b) ? (a):(b))
 const int MXN = 300;
-int a[MXN + 1], dp[MXN + 1][2];
+int a[MXN + 1], dp[MXN + 1][2];  // dp[x][0] = x isn't selected, dp[x][1] = x is selected
 int main()
 {
    int n;
