@@ -33,6 +33,10 @@ int main()
          ans += a[j].first;
          chk[j]++;
       }
+      // case 1 : check only non-sorted cyclic vertices
+      //          4 2 1 3 -> check (1,3,4) -> (1+3) + (1+4) = 9
+      // case 2 : check a vertex having minimum value in the graph and non-sorted cyclic vertices
+      //          1 8 9 7 6 -> check (1) and (8,9,7,6) -> (1+6) + (1+9) + (1+7) + (1+8) + (1+6) = 41
       ans += min((cycle - 2) * a[i].first, a[i].first + (cycle + 1) * a[0].first);
    }
    printf("%lld", ans);
