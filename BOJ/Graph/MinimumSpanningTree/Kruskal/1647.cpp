@@ -1,3 +1,4 @@
+// Kruskal algorithm
 #include <cstdio>
 
 typedef struct edge

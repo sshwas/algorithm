@@ -1,3 +1,4 @@
+// Kruskal algorithm
 #include <cstdio>
 #include <math.h>
 #include <algorithm>

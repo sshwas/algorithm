@@ -1,51 +1,40 @@
+// Cow Sorting
+
 #include <cstdio>
 #include <algorithm>
 using namespace std;
 
 const int MXN = 10000;
-int a[MXN + 1], t[MXN + 1], p[MXN + 1];
+pair<int,int> a[MXN + 1];
+char chk[MXN + 1];
 
-int f(int x)
-{
-   if(x == p[x]) return x;
-   else return (p[x] = f(p[x]));
-}
 int main()
 {
    int n;
    scanf("%d", &n);
-   for(int i = 1; i <= n; i++)
+   // a[].first = data, a[].second = index
+   for (int i = 0; i < n; i++)
    {
-      scanf("%d", &a[i]);
-      t[i] = a[i];
-      p[i] = i;
+      scanf("%d", &a[i].first);
+      a[i].second = i;
    }
-   sort(t + 1, t + n + 1);
-   
-   int nv = n;
-   for(int i = 1; i <= n; i++)
-      if(a[i] == t[i])
-         nv--;
+   sort(a, a + n);
 
    long long ans = 0;
-   int ne = 0;
-   for(int i = 1; i <= n; i++)
+   for (int i = 0; i < n; i++)
    {
-      if(ne >= nv - 1)
-         break;
-      for(int j = 1; j <= n; j++)
+      if (chk[i])
+         continue;
+      int cycle = 0;
+      // loop 1 cycle, cycle = the # of vertices in a cycle
+      for (int j = i; !chk[j]; j = a[j].second)
       {
-         if(a[i] == t[i] || a[j] == t[j] || i == j)
-            continue;
-         int p1 = f(i), p2 = f(j);
-         if(p1 == p2)
-            continue;
-         p[p1] = p2;
-         ans += (t[i] + t[j]);
- //  printf("%d:%d:%d:%d\n", i,j,t[i],t[j]);
-         ne++;
+         cycle++;
+         ans += a[j].first;
+         chk[j]++;
       }
+      ans += min((cycle - 2) * a[i].first, a[i].first + (cycle + 1) * a[0].first);
    }
-   printf("%d", ans);
+   printf("%lld", ans);
    return 0;
 }
