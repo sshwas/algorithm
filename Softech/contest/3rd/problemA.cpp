@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #define MAX_SIZE			(10)
 #define DIRECTION_TYPE_CNT	(4)
 
