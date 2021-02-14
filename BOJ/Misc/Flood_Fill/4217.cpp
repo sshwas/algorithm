@@ -10,34 +10,17 @@ const char ancient[7] = "WAKJSD"; // index indicates the number of holes
 int arr[MAX_NUM][MAX_NUM]; // input, arr[h][w*4] (0<h<=200, 0<w<=50, w should be changed to Binary)
 int CharCnt[6];
 
-int head, tail;
-int queue[(MAX_NUM * MAX_NUM)];
-int graph[(MAX_NUM * MAX_NUM)][4];
-char isVisited[(MAX_NUM * MAX_NUM)];
-//int dist[(MAX_NUM * MAX_NUM)];
-
-void enqueue(int x)
+void fill(int x, int y, int num)
 {
-	queue[tail] = x;
-	tail = (tail + 1) % MAX_NUM;
+    if (x == MAX_NUM || y == MAX_NUM)
+        return;
+    if (arr[x][y] == 1 || arr[x][y] == num)
+        return;
+    arr[x][y] = num;
+    fill(x + 1, y, num);
+    fill(x, y + 1, num);
 }
 
-int dequeue()
-{
-	int t = queue[head];
-	head = (head + 1) % MAX_NUM;
-	return t;
-}
-
-void BFS(int s)
-{
-	enqueue(s);
-	isVisited[s] = 1;
-	while (head != tail)
-	{
-
-	}
-}
 
 
 int main()
@@ -49,10 +32,16 @@ int main()
 			break;
 
 		// initialization with zero-padding
-		for (int i=1; i<=h+1; i++)
-			arr[i][w*4+1] = 0;
-		for (int i=1; i<=w*4+1; i++)
-			arr[h+1][i] = 0;
+        for (int i = 0; i <= h + 1; i++)
+        {
+            arr[i][0] = 0;
+            arr[i][w*4+1] = 0;
+        }
+        for (int i = 0; i <= w * 4 + 1; i++)
+        {
+            arr[0][i] = 0;
+            arr[h+1][i] = 0;
+        }
 
 		int x;
 		for (int i=1; i<=h ; i++)
@@ -67,7 +56,24 @@ int main()
 			}
 		}
 
-#if 1
+        // fill -1 instead of 0 in the background
+        fill(0, 0, -1);
+               
+        // flood-fill
+        for (int i = 1; i < MAX_NUM; i++)
+        {
+            for (int j = 1; j < MAX_NUM; j++)
+            {
+                if (arr[i][j] == 1)
+                {
+
+                }
+            }
+        }
+
+
+
+#if 0
 		// print out image
 		for (int i = 0; i<=h+1; i++)
 		{
@@ -76,20 +82,8 @@ int main()
 			printf("\n");
 		}
 #endif
-		
-
-
-
-
-
-
-
 
 	}
-
-
-
-
 
 	return 0;
 }
